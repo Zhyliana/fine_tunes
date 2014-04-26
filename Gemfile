@@ -1,11 +1,15 @@
 source 'https://rubygems.org'
+group :development do 
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'letter_opener'
+  gem 'debugger'
+end
 
-gem 'better_errors'
 gem 'annotate'
 gem 'bcrypt'
-gem 'binding_of_caller'
-
 gem 'pry-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
