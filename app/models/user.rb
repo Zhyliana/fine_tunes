@@ -14,16 +14,10 @@ class User < ActiveRecord::Base
   attr_reader :password, :password_digest, :session_token
   before_validation :ensure_session_token
   
-  has_many(
-    :notes,
-    class_name: "Note",
-    foreign_key: :user_id,
-    primary_key: :id
-    )
-  
   validates(
     :email,
     :password,
+    :password_digest,
     :session_token,
     presence: true
     )
@@ -33,47 +27,43 @@ class User < ActiveRecord::Base
     :session_token,
     uniqueness: true
     )
-  
+    
+  has_many(
+    :notes,
+    class_name: "Note",
+    foreign_key: :user_id,
+    primary_key: :id
+    )
+    
+  def self.find_by_credentials(params)
+    user = User.find_by_email(email: params[:email])
+    user.is_password?(params[:password]) ? user : nil
+  end
   
   def self.generate_session_token
     session_token = SecureRandom.hex
   end
   
   def reset_session_token!
-    self.session_token = SecureRandom.hex
-    self.session_token.save
-    session_token
+    self.session_token = User.generate_session_token
+    self.save!
+    
+    self.session_token
   end
   
-  def password=(secret)
-    if secret.present?
-      @password = secret
-      self.password_digest = BCrypt::Password.create(secret) 
+  def password=(plain_text)
+    if plain_text.present?
+      @password = plain_text
+      self.password_digest = BCrypt::Password.create(plain_text) 
     end
   end
 
-  def is_password?(secret)
-    BCrypt::Password.new(password_digest).is_password?(secret)
-  end
-  
-  def self.find_by_credentials(email, secret)
-    @user = User.find_by_email(email)
-    
-    if @user.try(:is_password?, secret)
-      return @user
-    else
-      puts "Why you tryna hack?"
-    end
+  def is_password?(plain_text)
+    BCrypt::Password.new(password_digest).is_password?(plain_text)
   end
   
   def ensure_session_token
-    #self.class??
-    self.session_token ||= SecureRandom.hex
-    # replace SecureRandom.hex w self.class.generate_session_token
+    self.session_token ||= User.generate_session_token
   end
-  
-  private
-  def user_params
-    params.require(:user).permit(:emails, :password)
-  end
+
 end

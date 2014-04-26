@@ -23,4 +23,10 @@ class Band < ActiveRecord::Base
     through: :albums,
     source: :tracks
     )
+    
+  validates(
+    :name,
+    uniqueness: true,
+    presence: true
+    )
 end
