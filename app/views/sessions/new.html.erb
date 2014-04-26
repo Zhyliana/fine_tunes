@@ -1,0 +1,16 @@
+<h1 style="font-family: sans-serif">Log into finetunes</h1>
+
+
+<form action="<%= session_url %>" method="post">
+  <input name="authenticity_token" type="hidden">
+
+  <label for="user_email">Email</label><br>
+  <input type="text" name="user[email]" id="user_email">
+  <br>
+
+  <label for="user_password">Password</label><br>
+  <input type="password" name="user[password]" id="user_password">
+  <br>
+
+  <input type="submit">
+</form>

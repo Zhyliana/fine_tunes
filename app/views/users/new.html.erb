@@ -1,0 +1,14 @@
+<h1 style="font-family: sans-serif">Sign Up for finetunes</h1>
+
+<form action="http://localhost:3000/users" method="POST">
+  <input name="authenticity_token" type="hidden">
+  
+  <label for="new_username">Email</label><br>
+  <input name="user[email]" type="text" id="new_email"></input><br>
+
+  <label for="new_password">Password</label><br>
+  <input name="user[password]" type="password" id="new_password"></input><br>
+
+  <input type="submit" value="Sign Up!"></input>
+  
+</form>

@@ -1,0 +1,13 @@
+<h1 style="font-family: sans-serif">all bands</h1>
+
+<% Band.all.each do |band| %>
+  <%= band.id %>.<b><%= band.name %></b><br>
+  <select name="band[album]" id="album">
+    <% band.albums.each do |album|%>
+      <option value='<%=album.id %>'> 
+          <%= "#{album.name}" %>
+      </option>
+    <% end %>
+  </select><br>
+<%end%>
+

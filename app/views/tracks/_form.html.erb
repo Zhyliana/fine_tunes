@@ -1,0 +1,13 @@
+<input name="authenticity_token" type="hidden">
+<label for="album">Select album:</label><br>
+<select name="track[album_id]" id="album">
+  <% Album.all.each do |album|%>
+    <option value='<%=album.id %>'> <%= "#{album.name} - "  "#{Band.find(album.band_id).name}" %></option>
+  <% end %>
+</select></br>
+
+<label for="new_track_name">Name of your track:</label><br>
+<input name="track[name]" type="text" id="new_track_name"></input><br>
+
+<label for="new_lyrics">Lyrics:</label><br>
+<input name="track[lyrics]" type="textarea" id="new_lyrics"></input><br>

@@ -1,0 +1,21 @@
+<h1 style="font-family: sans-serif" ><%= @band.name %> </h1>
+<%@band.albums.each do |album|%>
+  <b><%=album.name%></b>
+  <%album.tracks.each do |track|%>
+    <ul>
+      <li><%= track.name %></li>
+    </ul>
+  <% end %>
+<%end%>
+
+<%= link_to "All Albums", albums_url %>
+<br>
+<%= link_to "All Tracks", tracks_url %>
+<br>
+
+<%= link_to "Add an Album", new_band_album_url(@band) %>
+<br>
+<%= link_to "Add a Track", new_track_url %>
+<br>
+
+<!-- <a href="http://cashcats.biz">Cat Pictures</a> -->
