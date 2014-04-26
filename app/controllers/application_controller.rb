@@ -18,4 +18,7 @@ class ApplicationController < ActionController::Base
     current_user.try(:reset_session_token!)
   end
 
+  def user_params
+   params.require(:user).permit(:email, :password_digest)
+  end
 end
