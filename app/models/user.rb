@@ -11,7 +11,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_reader :password, :password_digest, :session_token
+  attr_reader :password
   before_validation :ensure_session_token
   
   validates(
@@ -35,9 +35,14 @@ class User < ActiveRecord::Base
     primary_key: :id
     )
     
+  def password=(plain_text)
+      @password = plain_text
+      self.password_digest = BCrypt::Password.create(plain_text) 
+  end
+    
   def self.find_by_credentials(params)
-    user = User.find_by_email(params[:email])
-    user.is_password?(params[:password]) ? user : nil
+    user = User.find_by_email(email: params[:email])
+    user && user.is_password?(params[:password]) ? user : nil
   end
   
   def self.generate_session_token
@@ -50,18 +55,12 @@ class User < ActiveRecord::Base
     
     self.session_token
   end
-  
-  def password=(plain_text)
-    if plain_text.present?
-      @password = plain_text
-      self.password_digest = BCrypt::Password.create(plain_text) 
-    end
-  end
 
   def is_password?(plain_text)
     BCrypt::Password.new(password_digest).is_password?(plain_text)
   end
   
+  private
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end

@@ -22,14 +22,5 @@ class SessionsController < ApplicationController
 
     redirect_to new_session_url
   end
-  
-  # def login!(user)
-  #   session[:token] = user.reset_session_token!
-  #   @current_user = user
-  # end
-  # 
-  # def redirect_logged_in
-  #   redirect_to user_url if logged_in?
-  # end
 
 end

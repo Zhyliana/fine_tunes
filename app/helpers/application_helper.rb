@@ -1,10 +1,10 @@
-module ApplicationHelper
-  
+module ApplicationHelper 
   def current_user
     @current_user  ||= User.find_by_session_token(session[:token])
   end
 
   def login!(user)
+    
     session[:token] = user.reset_session_token! 
     @current_user = user
   end
@@ -18,6 +18,6 @@ module ApplicationHelper
   end
 
   def user_params
-   params.require(:user).permit(:email, :password_digest)
+   params.require(:user).permit(:email, :password_digest, :password)
   end  
 end

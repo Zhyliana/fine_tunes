@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(user_params)
   end
 
   def new
@@ -14,15 +14,14 @@ class UsersController < ApplicationController
 
   def create
    @user = User.new(user_params)
-   @user.save
    
    if @user.try(:save)
      login!(@user)
-     redirect_to user_url(@user)
+     redirect_to bands_url
    else
      flash.now[:errors] = ["New user NOT created."]
      render :new
    end
   end
-  
+    
 end 
