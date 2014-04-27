@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   def index
-    @users = Users.all
+    @users = User.all
   end
 
   def show
@@ -14,14 +14,15 @@ class UsersController < ApplicationController
 
   def create
    @user = User.new(user_params)
-
+   @user.save
+   
    if @user.try(:save)
      login!(@user)
      redirect_to user_url(@user)
    else
-     flash.now[:errors] = @user.errors.full_messages
+     flash.now[:errors] = ["New user NOT created."]
      render :new
    end
   end
   
-end
+end 

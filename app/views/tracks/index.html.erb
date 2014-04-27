@@ -1,7 +1,7 @@
 <h1>all tracks</h1>
 
 <% Track.all.each do |track| %>
-  <%= track.id %>. <b><%= track.name %></b>  - <%=track.album.name %> 
+  <%= track.id %>. <b><%= link_to track.name, track_url(track) %></b> - <%=track.album.name %> 
   (<%= track.band.name %>)
   <br>
 <%end%>

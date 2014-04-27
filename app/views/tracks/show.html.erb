@@ -1,17 +1,29 @@
 <h1 style="font-family: sans-serif" ><%= @track.name %> </h1>
-<h2 style="font-family: sans-serif" >- <%= @track.album.name %> (<%= @track.band.name %>) </h2>
+<h2 style="font-family: sans-serif" >- <%= link_to @track.album.name, album_url(@track.album) %> (<%= link_to @track.band.name, band_url(@track.band) %>) </h2>
 <br>
+<% if @track.featured == "BONUS" %>
+  Bonus track
+<%end%><br>
 
-<% @track.notes.each do |note| %>
-  <%= note %><br>
+<% if @track.lyrics %>
+  <% @track.lyric_lines.each do |line| %>
+    <%= line %><br>
+  <% end %>
+<% end %>
+
+<% if @track.notes %>
+  <% @track.notes.all.each do |note| %>
+    <%= User.find(note.user_id).email%><br>
+    <%= note.body %>
+  <%end%>
 <%end%>
 
-<%= link_to "All Albums", albums_url %>
+<%= link_to "Back to #{@track.album.name}", album_url(@track.album) %>
 <br>
-<%= link_to "All Tracks", tracks_url %>
+<%= link_to "More #{@track.band.name}", band_url(@track.band) %>
 <br>
 
-<%= link_to "Add an Album", new_band_album_url(@track.band) %>
-<br>
-<%= link_to "Add a Track", new_album_track_url(@track.album) %>
-<br>
+
+<%= link_to "Edit #{@track.name}", edit_track_url %><br>
+
+<%= button_to "Delete track", track_url(@track), method: :delete %>

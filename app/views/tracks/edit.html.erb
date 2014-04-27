@@ -1,6 +1,6 @@
-<h1 style="font-family: sans-serif">edit your track</h1>
+<h1 style="font-family: sans-serif">edit <%= @track.name %></h1>
   <form action="<%=track_url(@track)%>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
-  <%= render partial: 'form' %>
-  <input type="submit" value="Edit"></input>
+  <%= render partial: 'track_form' %>
+  <input type="submit" value="Update"></input>
 </form>

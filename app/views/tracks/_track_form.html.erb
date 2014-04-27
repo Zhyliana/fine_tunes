@@ -1,0 +1,20 @@
+<input name="authenticity_token" type="hidden">
+
+<label for="track_name">Track name:</label><br>
+<input name="track[name]" type="text" id="track_name" value="<%= @track.name if @track.name %>"></input><br>
+
+<label for="album">Select album:</label><br>
+<select name="track[album_id]" id="album">
+  <% Album.all.each do |album|%>
+    <option value="<%=album.id %>"<%= @track.album == album ? "selected" : "" %>> <%= "#{album.name} - #{album.band.name}" %></option>
+  <% end %>
+</select></br>
+
+Track Type:<br>
+<input type="radio" name="track[featured]" id="featured_track_regular" value="REGULAR"<%= "checked" if @track.featured == "REGULAR" %>>
+<label for="featured_track_regular">Studio</label><br>
+<input type="radio" name="track[featured]" id="featured_track_bonus" value="BONUS"<%= "checked" if @track.featured == "BONUS" %>>
+<label for="featured_track_bonus">Bonus</label><br><br>
+
+<label for="track_lyrics">Lyrics:</label><br>
+<textarea name="track[lyrics]" id="track_lyrics"><%= @track.lyrics if @track.lyrics %></textarea><br>

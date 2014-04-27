@@ -1,0 +1,6 @@
+<h1>all users</h1>
+<ol>
+  <% @users.each do |user| %>
+    <li> <b><%= link_to user.email, user_url(user) %></b> - <%= user.password%></li>
+  <%end%>
+</ol>

@@ -48,4 +48,7 @@ class Track < ActiveRecord::Base
     :featured,
     inclusion:  %w(REGULAR BONUS)
     )
+  def lyric_lines
+    lyrics.chomp.split("\r").map { |line| "#{line}" }
+  end
 end

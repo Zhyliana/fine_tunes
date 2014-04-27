@@ -7,7 +7,7 @@
   <label for="band">Select band:</label><br>
   <select name="album[band_id]" id="band">
     <% Band.all.each do |band| %>
-      <option value="<%= band.id %>"<%= @album.band == band ? "selected" : "" %>>
+      <option value="<%= band.id %>" <%= @album.band == band ? "selected" : "" %>>
         <%= band.name %>
       </option>
     <% end %>
