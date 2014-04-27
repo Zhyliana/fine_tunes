@@ -6,13 +6,12 @@ class SessionsController < ApplicationController
   def create
     @current_user = User.find_by_credentials(user_params)
     
-    if @current_user.nil?
-      flash.now[:errors] = ["Incorrect username and/or password"]
-      render :new
-      return
-    else
+    if @current_user
       login!(@current_user)
       redirect_to user_url(@current_user)
+    else
+      flash.now[:errors] = ["Incorrect username and/or password"]
+      render :new
     end
   end
     
