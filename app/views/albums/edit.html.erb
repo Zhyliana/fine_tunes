@@ -1,2 +1,8 @@
-<h1>Albums#edit</h1>
-<p>Find me in app/views/albums/edit.html.erb</p>
+<h1 style="font-family: sans-serif">edit <%= @album.name %></h1>
+  <form action="<%= album_url(@album) %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  
+  <%= render partial: "album_form"%>
+  
+  <button type="submit">Update</button>
+</form>

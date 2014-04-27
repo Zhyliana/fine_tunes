@@ -1,15 +1,20 @@
-<h1 style="font-family: sans-serif" ><%= "#{@album.name}" %> </h1>
+<h1 style="font-family: sans-serif" ><%= @album.name %> </h1>
 <h2 style="font-family: sans-serif" >by <%= @album.band.name %> </h1>
 
 <ul>
 <% @album.tracks.each do |track| %>
-  <li><%= track.name %></li>
+  <li><%= link_to track.name, track_url(track) %></li>
 <% end %>
-<ul>
+</ul>
 
-<%= link_to "All Albums", albums_url %><br>
-<%= link_to "All Tracks", tracks_url %>
-<br>
+<%= "#{@album.audio.capitalize} Album" if @album.audio %><br><br>
 
-<%= link_to "Add a Track", new_album_track_url(@album) %>
-<br>
+<%= link_to "Add a Track to #{@album.name}", new_album_track_url(@album) %><br>
+
+<%= link_to "Add a #{@album.band.name} Album", new_band_album_url(@album.band) %><br>
+
+<%= link_to "Edit #{@album.name}", edit_album_url %><br>
+
+<%= link_to "All albums", albums_url %><br>
+
+<%= button_to "Delete album", album_url(@album), method: :delete %>

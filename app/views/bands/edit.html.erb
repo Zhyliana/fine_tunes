@@ -1,2 +1,4 @@
-<h1>Bands#edit</h1>
-<p>Find me in app/views/bands/edit.html.erb</p>
+<h1 style="font-family: sans-serif">edit <%= @band.name %> </h1>
+
+  <%= render partial: "band_form", locals: {verb: "PATCH"}%>
+  <input type="hidden" name="_method" value="PATCH">

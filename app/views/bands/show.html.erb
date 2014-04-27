@@ -1,21 +1,23 @@
-<h1 style="font-family: sans-serif" ><%= @band.name %> </h1>
+<h1 style="font-family: sans-serif" ><%= @band.name %>'s albums </h1>
+
 <%@band.albums.each do |album|%>
-  <b><%=album.name%></b>
-  <%album.tracks.each do |track|%>
-    <ul>
-      <li><%= track.name %></li>
-    </ul>
-  <% end %>
-<%end%>
+  <b><%= link_to album.name, album_url(album) %></b>
+  <ul>
+    <%album.tracks.each do |track|%>
+      <li><%= link_to track.name, track_url(track) %></li>
+    <% end %>
+  </ul>
+<%end%><br>
 
-<%= link_to "All Albums", albums_url %>
+
+<%= link_to "Add a #{@band.name} Album", new_band_album_url(@band) %>
 <br>
-<%= link_to "All Tracks", tracks_url %>
+<%= link_to "All bands", bands_url %>
 <br>
 
-<%= link_to "Add an Album", new_band_album_url(@band) %>
+<%= link_to "Edit #{@band.name}", edit_band_url %>
 <br>
-<%= link_to "Add a Track", new_track_url %>
-<br>
+
+<%= button_to "Delete band", band_url(@band), method: :delete %>
 
 <!-- <a href="http://cashcats.biz">Cat Pictures</a> -->

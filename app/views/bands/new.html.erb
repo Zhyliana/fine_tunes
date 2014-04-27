@@ -1,11 +1,5 @@
-<h1 style="font-family: sans-serif">Save a new band with us</h1>
+<h1 style="font-family: sans-serif">Save a new band</h1>
 
-<form action="http://localhost:3000/bands" method="POST">
-  <input name="authenticity_token" type="hidden">
-  
-  <label for="new_band_name">Name of your Band:</label><br>
-  <input name="band[name]" type="text" id="new_band_name"></input><br>
-
-  <input type="submit" value="Create"></input>
+<%= render partial: "band_form", locals: { verb: "POST" }%>
   
 </form>

@@ -1,15 +1,12 @@
 <h1>all albums</h1>
 
 <% @albums.each do |album| %>
-  <%= album.id %>. <b><%= album.name %></b>  - <%= album.band.name %> <br>
-  Tracks:<br>
-  <select name="band[album]" id="album">
-    <% album.tracks.each do |track| %>
-      <option value='<%=track.id %>'> 
-          <%= track.name %>
-      </option>
-    <%end%>
-  <br><br>
+  <%= album.id %>. <b><%= link_to album.name, album_url(album) %></b>  - <%= link_to album.band.name, band_url(album.band.id) %> <br>
+  <ul>
+    <% album.tracks.each do |track|%>
+        <li><%= link_to track.name, track_url(track) %></li>
+    <% end %>
+  </ul><br>
 <%end%>
 
 

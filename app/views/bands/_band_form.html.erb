@@ -1,0 +1,11 @@
+<% action_url = (verb == "POST" ? bands_url : band_url(params[:id])) %>
+<% button_msg = (verb == "POST" ? "Create" : "Update") %>
+
+<form action="<%= action_url %>" method="POST">
+  <input name="authenticity_token" type="hidden">
+  
+  <label for="new_band_name">Name of your band:</label><br>
+  <input name="band[name]" type="text" id="new_band_name" value="<%= @band.name %>"></input><br>
+
+  <input type="submit" value="<%= button_msg %>"></input>
+
